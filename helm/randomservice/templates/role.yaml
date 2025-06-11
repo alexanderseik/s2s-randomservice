@@ -1,0 +1,11 @@
+{{- range .Values.services }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: service-list-cluster-role-{{.namespace}}-{{.name}}
+rules:
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list", "watch"]
+---
+  {{- end}}

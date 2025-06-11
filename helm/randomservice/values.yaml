@@ -1,0 +1,18 @@
+namespaces:
+  - name: order
+  - name: payment
+  - name: delivery
+
+services:
+  - name: s1
+    namespace: order
+  - name: s2
+    namespace: order
+  - name: s3
+    namespace: payment
+  - name: s4
+    namespace: delivery
+  - name: s5
+    namespace: delivery
+  - name: s6
+    namespace: payment

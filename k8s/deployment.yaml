@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: s1
+  namespace: example
+  labels:
+    svc: s1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: s1
+  template:
+    metadata:
+      labels:
+        name: s1
+    spec:
+      containers:
+        - name: randomservice
+          image: randomservice:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080

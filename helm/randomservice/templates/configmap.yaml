@@ -1,0 +1,10 @@
+{{- range .Values.namespaces }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: service-map
+  namespace: {{.name}}
+data:
+  services: '{{ $.Values.services | toJson }}'
+---
+{{- end}}

@@ -1,0 +1,33 @@
+{{- range .Values.services }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.namespace}}-{{.name}}
+  namespace: {{.namespace}}
+  labels:
+    svc: {{.namespace}}-{{.name}}
+    model: s2s
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: {{.namespace}}-{{.name}}
+  template:
+    metadata:
+      labels:
+        name: {{.namespace}}-{{.name}}
+    spec:
+      containers:
+        - name: randomservice
+          image: randomservice:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVICES
+              valueFrom:
+                configMapKeyRef:
+                  key: services
+                  name: service-map
+---
+  {{- end}}

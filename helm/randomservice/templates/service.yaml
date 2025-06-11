@@ -1,0 +1,18 @@
+{{- range .Values.services }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: random-service-{{.namespace}}-{{.name}}
+  namespace: {{.namespace}}
+  labels:
+    model: s2s
+spec:
+  selector:
+    name: {{.namespace}}-{{.name}}
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+---
+  {{- end}}
